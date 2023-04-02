@@ -7,7 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Protobuf Include="Protos\greet.proto" GrpcServices="Server" />
+    <None Remove="Protos\university.proto" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Protobuf Include="Protos\university.proto" GrpcServices="Server">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Protobuf>
   </ItemGroup>
 
   <ItemGroup>

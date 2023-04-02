@@ -1,55 +1,28 @@
 syntax = "proto3";
 
-option csharp_namespace = "University-Api.Protos";
+option csharp_namespace = "UniversityApi.Protos";
 package UniversityApi;
 
 service University{
-	rpc InitUniversity (ManagerInfoRequest)  returns (HelloReply);
+	rpc InitUniversity (ManagerRequest)  returns (ManagerRespone);
 }
 
 
-message ManagerInfoRequest{
+message ManagerRequest{
+	string name=1;
+	string last_name=2;
+	string email=3;
+	UniversityInfo university=4;
+}
+
+message UniversityInfo{
+	string name=1;
+	string address=2;
+}
+
+message ManagerRespone{	
+int32 manager_id=1;
+int32 university_id=2;
 
 }
 
-message CatalogItemRequest {
-	int32 id = 1;
-}
-
-message CatalogItemsRequest {
-	string ids = 1;
-	int32 pageSize = 2;
-	int32 pageIndex = 3;
-}
-
-message CatalogItemResponse {
-	int32 id = 1;
-	string name = 2;
-    string description=3;
-    double price=4;
-    string picture_file_name=5;
-    string picture_uri=6;
-    CatalogType catalog_type=8;
-    CatalogBrand catalog_brand=10;
-    int32 available_stock=11;
-    int32 restock_threshold=12;
-    int32 max_stock_threshold=13;
-    bool on_reorder=14;
-}
-
-message CatalogBrand {
-	int32 id = 1;
-	string name = 2;
-}
-
-message CatalogType {
-	int32 id = 1;
-	string type = 2;
-}
-
-message PaginatedItemsResponse {
-	int32 pageIndex = 1;
-	int32 pageSize = 2;
-	int64 count = 3;
-	repeated CatalogItemResponse data = 4;
-}
