@@ -19,7 +19,7 @@ public class Groups
     public IQueryable<Students> Students { get; set; }
 
 
-    public int ProfessionId { get; set; }
-    public Professions  Professions{ get; set; }
+    public int? ProfessionsId { get; set; }
+    public Professions?  Professions{ get; set; }
 
 }

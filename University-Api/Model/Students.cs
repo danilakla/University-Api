@@ -10,7 +10,7 @@ public class Students
     public string SecondName { get; set; }
     public string Email { get; set; }
 
-    public int GroupId { get; set; }
+    public int GroupsId { get; set; }
     public Groups Groups { get; set; }
 
 }

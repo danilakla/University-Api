@@ -4,7 +4,7 @@
 
 namespace UniversityApi.Migrations
 {
-    public partial class intiUniversityDataBase : Migration
+    public partial class initTables : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -95,15 +95,14 @@ namespace UniversityApi.Migrations
                     ProfessionId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FacultieId = table.Column<int>(type: "int", nullable: false),
-                    FacultiesFacultieId = table.Column<int>(type: "int", nullable: true)
+                    FacultiesId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Professions", x => x.ProfessionId);
                     table.ForeignKey(
-                        name: "FK_Professions_Faculties_FacultiesFacultieId",
-                        column: x => x.FacultiesFacultieId,
+                        name: "FK_Professions_Faculties_FacultiesId",
+                        column: x => x.FacultiesId,
                         principalTable: "Faculties",
                         principalColumn: "FacultieId");
                 });
@@ -117,8 +116,7 @@ namespace UniversityApi.Migrations
                     NumberGroup = table.Column<int>(type: "int", nullable: false),
                     YearCome = table.Column<int>(type: "int", nullable: false),
                     FacultiesId = table.Column<int>(type: "int", nullable: false),
-                    ProfessionId = table.Column<int>(type: "int", nullable: false),
-                    ProfessionsProfessionId = table.Column<int>(type: "int", nullable: false)
+                    ProfessionsId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -130,11 +128,10 @@ namespace UniversityApi.Migrations
                         principalColumn: "FacultieId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Groups_Professions_ProfessionsProfessionId",
-                        column: x => x.ProfessionsProfessionId,
+                        name: "FK_Groups_Professions_ProfessionsId",
+                        column: x => x.ProfessionsId,
                         principalTable: "Professions",
-                        principalColumn: "ProfessionId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "ProfessionId");
                 });
 
             migrationBuilder.CreateTable(
@@ -146,15 +143,14 @@ namespace UniversityApi.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SecondName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    GroupId = table.Column<int>(type: "int", nullable: false),
-                    GroupsGroupId = table.Column<int>(type: "int", nullable: false)
+                    GroupsId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Students", x => x.StudentId);
                     table.ForeignKey(
-                        name: "FK_Students_Groups_GroupsGroupId",
-                        column: x => x.GroupsGroupId,
+                        name: "FK_Students_Groups_GroupsId",
+                        column: x => x.GroupsId,
                         principalTable: "Groups",
                         principalColumn: "GroupId",
                         onDelete: ReferentialAction.Cascade);
@@ -177,19 +173,19 @@ namespace UniversityApi.Migrations
                 column: "FacultiesId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Groups_ProfessionsProfessionId",
+                name: "IX_Groups_ProfessionsId",
                 table: "Groups",
-                column: "ProfessionsProfessionId");
+                column: "ProfessionsId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Professions_FacultiesFacultieId",
+                name: "IX_Professions_FacultiesId",
                 table: "Professions",
-                column: "FacultiesFacultieId");
+                column: "FacultiesId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Students_GroupsGroupId",
+                name: "IX_Students_GroupsId",
                 table: "Students",
-                column: "GroupsGroupId");
+                column: "GroupsId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Universitys_ManagersId",

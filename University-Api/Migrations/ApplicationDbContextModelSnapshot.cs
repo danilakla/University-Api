@@ -93,10 +93,7 @@ namespace UniversityApi.Migrations
                     b.Property<int>("NumberGroup")
                         .HasColumnType("int");
 
-                    b.Property<int>("ProfessionId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProfessionsProfessionId")
+                    b.Property<int?>("ProfessionsId")
                         .HasColumnType("int");
 
                     b.Property<int>("YearCome")
@@ -106,7 +103,7 @@ namespace UniversityApi.Migrations
 
                     b.HasIndex("FacultiesId");
 
-                    b.HasIndex("ProfessionsProfessionId");
+                    b.HasIndex("ProfessionsId");
 
                     b.ToTable("Groups");
                 });
@@ -148,10 +145,7 @@ namespace UniversityApi.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProfessionId"), 1L, 1);
 
-                    b.Property<int>("FacultieId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("FacultiesFacultieId")
+                    b.Property<int?>("FacultiesId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -160,7 +154,7 @@ namespace UniversityApi.Migrations
 
                     b.HasKey("ProfessionId");
 
-                    b.HasIndex("FacultiesFacultieId");
+                    b.HasIndex("FacultiesId");
 
                     b.ToTable("Professions");
                 });
@@ -177,10 +171,7 @@ namespace UniversityApi.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("GroupId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("GroupsGroupId")
+                    b.Property<int>("GroupsId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -193,7 +184,7 @@ namespace UniversityApi.Migrations
 
                     b.HasKey("StudentId");
 
-                    b.HasIndex("GroupsGroupId");
+                    b.HasIndex("GroupsId");
 
                     b.ToTable("Students");
                 });
@@ -254,9 +245,7 @@ namespace UniversityApi.Migrations
 
                     b.HasOne("UniversityApi.Model.Professions", "Professions")
                         .WithMany("Groups")
-                        .HasForeignKey("ProfessionsProfessionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ProfessionsId");
 
                     b.Navigation("Faculties");
 
@@ -267,7 +256,7 @@ namespace UniversityApi.Migrations
                 {
                     b.HasOne("UniversityApi.Model.Faculties", "Faculties")
                         .WithMany("Professions")
-                        .HasForeignKey("FacultiesFacultieId");
+                        .HasForeignKey("FacultiesId");
 
                     b.Navigation("Faculties");
                 });
@@ -276,7 +265,7 @@ namespace UniversityApi.Migrations
                 {
                     b.HasOne("UniversityApi.Model.Groups", "Groups")
                         .WithMany("Students")
-                        .HasForeignKey("GroupsGroupId")
+                        .HasForeignKey("GroupsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

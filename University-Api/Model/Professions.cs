@@ -8,7 +8,7 @@ public class Professions
     public int ProfessionId { get; set; }
     public string Name { get; set; }
 
-    public int FacultieId { get; set; }
+    public int? FacultiesId { get; set; }
 
     public Faculties? Faculties { get; set; }
     public IQueryable<Groups>  Groups{ get; set; }
