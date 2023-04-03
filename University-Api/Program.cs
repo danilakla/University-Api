@@ -8,7 +8,6 @@ using System.Text;
 using UniversityApi.Data;
 using UniversityApi.Extensions;
 using UniversityApi.Infrastructure.UnitOfWork;
-using UniversityApi.IntegrationEvents.EventHandling;
 using UniversityApi.IntegrationEvents.Events;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -71,8 +70,3 @@ app.MapControllers();
 app.Run();
 
 
- void ConfigureEventBus(IApplicationBuilder app)
-{
-    var eventBus = app.ApplicationServices.GetRequiredService<IEventBus>();
-    eventBus.Subscribe<CreateProfileBaseOnUniverDataIntegrationEvent, CreateProfileBasedOnDataFromUniversityServiceIntegrationEventHandler>();
-}

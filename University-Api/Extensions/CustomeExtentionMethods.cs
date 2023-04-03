@@ -2,7 +2,6 @@
 using EventBus;
 using RabbitMqCustomLib;
 using Autofac;
-using UniversityApi.IntegrationEvents.EventHandling;
 using Microsoft.AspNetCore.Connections;
 using Microsoft.Extensions.Options;
 using System.Data.Common;
@@ -77,7 +76,6 @@ public static class CustomeExtentionMethods
         
 
         services.AddSingleton<IEventBusSubscriptionsManager, InMemoryEventBusSubscriptionsManager>();
-        services.AddTransient<CreateProfileBasedOnDataFromUniversityServiceIntegrationEventHandler>();
     
         return services;
     }

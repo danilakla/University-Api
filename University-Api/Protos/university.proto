@@ -5,6 +5,8 @@ package UniversityApi;
 
 service University{
 	rpc InitUniversity (ManagerRequest)  returns (ManagerRespone);
+	rpc GetManagerInfo (Email) returns (ManagerRespone);
+
 }
 
 
@@ -18,6 +20,10 @@ message ManagerRequest{
 message UniversityInfo{
 	string name=1;
 	string address=2;
+}
+
+message Email{
+	string email=1;
 }
 
 message ManagerRespone{	

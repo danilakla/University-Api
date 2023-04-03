@@ -5,5 +5,5 @@ namespace UniversityApi.IntegrationEvents;
 public interface IUniversityIntegrationEventService
 {
 
-    Task test(IntegrationEvent @event);
+    Task CreateProfile(IntegrationEvent @event);
 }

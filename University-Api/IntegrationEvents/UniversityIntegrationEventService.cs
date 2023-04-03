@@ -12,7 +12,7 @@ public class UniversityIntegrationEventService: IUniversityIntegrationEventServi
         _eventBus = eventBus;
     }
 
-    public async Task test(IntegrationEvent events)
+    public async Task CreateProfile(IntegrationEvent events)
     {
            _eventBus.Publish(events);
     }

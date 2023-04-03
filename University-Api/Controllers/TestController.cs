@@ -62,11 +62,5 @@ public class TestController : ControllerBase
         }
 
     }
-    [HttpGet("test.msgenvetbr")]
-    public async Task<IActionResult> test23()
-    {
-       await _universityIntegrationEventService.test(new CreateProfileBaseOnUniverDataIntegrationEvent());
-
-        return Ok();
-    }
+   
 }
