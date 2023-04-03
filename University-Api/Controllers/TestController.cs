@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using UniversityApi.Data;
 using UniversityApi.Infrastructure.UnitOfWork;
 using UniversityApi.IntegrationEvents;
+using UniversityApi.IntegrationEvents.Events;
 using UniversityApi.Model;
 using UniversityApi.Protos;
 
@@ -64,7 +65,7 @@ public class TestController : ControllerBase
     [HttpGet("test.msgenvetbr")]
     public async Task<IActionResult> test23()
     {
-       await _universityIntegrationEventService.test(new IntegrationEvent());
+       await _universityIntegrationEventService.test(new CreateProfileBaseOnUniverDataIntegrationEvent());
 
         return Ok();
     }
