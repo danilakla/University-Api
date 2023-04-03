@@ -18,6 +18,7 @@ public class UniversityRepository : IRepository<Universitys>
         try
         {
                  await _applicationDbContext.AddAsync(item);
+
             return item;
         }
         catch (Exception)

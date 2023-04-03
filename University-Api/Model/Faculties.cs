@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace UniversityApi.Model;
 
@@ -11,9 +12,13 @@ public class Faculties
 
 
     public int UniversitysId { get; set; }
+    [JsonIgnore]
+
     public Universitys Universitys { get; set; }
 
     public int DeansId { get; set; }
+    [JsonIgnore]
+
     public Deans Deans{ get; set; }
 
     public IQueryable<Groups> Groups { get; set; }

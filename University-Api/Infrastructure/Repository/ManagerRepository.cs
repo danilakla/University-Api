@@ -16,6 +16,7 @@ public class ManagerRepository : IRepository<Managers>
         try
         {
             await _applicationDbContext.AddAsync(item);
+            await _applicationDbContext.SaveChangesAsync();
             return item;
         }
         catch (Exception)

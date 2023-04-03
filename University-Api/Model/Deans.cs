@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace UniversityApi.Model;
 
@@ -15,7 +16,8 @@ public class Deans
 
     public string LastName { get; set; }
 
-    public string PhoneNumber { get; set; }
+    public string PhoneNumber { get; set; }= "********";
+    [JsonIgnore]
     public Faculties Faculties{ get; set; }
 
 }

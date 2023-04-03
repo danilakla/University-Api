@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace UniversityApi.Model;
 
@@ -13,6 +14,8 @@ public class Universitys
     public int ManagersId{ get; set; }
 
     [Required]
+    [JsonIgnore]
+
     public Managers Managers { get; set; }
 
     public IQueryable<Faculties> Faculties { get; set; }
