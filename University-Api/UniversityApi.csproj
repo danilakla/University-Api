@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -7,11 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Protos\dean.proto" />
     <None Remove="Protos\university.proto" />
   </ItemGroup>
 
   <ItemGroup>
-    <Protobuf Include="Protos\university.proto" GrpcServices="Server">
+	  <Protobuf Include="Protos\dean.proto" ProtoCompile="True" GrpcServices="Server">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+
+	  </Protobuf>
+    <Protobuf Include="Protos\university.proto"  ProtoCompile="True"  GrpcServices="Server">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Protobuf>
   </ItemGroup>
@@ -27,6 +32,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="RabbitMQ.Client" Version="6.5.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>

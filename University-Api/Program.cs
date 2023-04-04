@@ -1,14 +1,18 @@
 using Autofac.Extensions.DependencyInjection;
 using EventBus.Abstructions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using RabbitMqCustomLib;
 using System.Text;
 using UniversityApi.Data;
 using UniversityApi.Extensions;
+using UniversityApi.Grpc;
 using UniversityApi.Infrastructure.UnitOfWork;
 using UniversityApi.IntegrationEvents.Events;
+using UniversityApi.Services.CryptoService;
+using UniversityApi.Services.FacultieService;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
@@ -22,8 +26,17 @@ builder.Services.AddControllers();
 builder.Services.AddSwaggerGen();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddSingleton<ICryptoService,  CryptoService>();
+builder.Services.AddSingleton<IFacultieService, FacultieService>();
+
 builder.Services.AddEventBus(builder.Configuration);
 builder.Services.AddIntegrationServices(builder.Configuration);
+builder.Services.AddDataProtection().SetApplicationName("Chat")
+            .AddKeyManagementOptions(options =>
+            {
+                options.AutoGenerateKeys = false;
+                
+            });
 
 builder.Services.AddDbContext<ApplicationDbContext>(option =>
 {
@@ -68,6 +81,7 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.MapGrpcService<UniversityService>();
+app.MapGrpcService<DeanServicesGrpc>();
 
 
 app.Run();
