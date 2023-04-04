@@ -56,15 +56,18 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseCors(builder => builder.AllowAnyOrigin());
+app.UseRouting();
 app.UseHttpsRedirection();
+
 
 app.UseAuthentication();
 app.UseAuthorization();
 
 // Configure the HTTP request pipeline.
-app.MapGrpcService<UniversityService>();
 app.MapControllers();
+
+app.MapGrpcService<UniversityService>();
 
 
 app.Run();

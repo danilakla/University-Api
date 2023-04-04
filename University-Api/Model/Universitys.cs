@@ -18,5 +18,5 @@ public class Universitys
 
     public Managers Managers { get; set; }
 
-    public IQueryable<Faculties> Faculties { get; set; }
+    public List<Faculties> Faculties { get; set; }
 }

@@ -12,8 +12,8 @@ using UniversityApi.Data;
 namespace UniversityApi.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230402204103_initTables")]
-    partial class initTables
+    [Migration("20230404001655_InitTables")]
+    partial class InitTables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -61,7 +61,7 @@ namespace UniversityApi.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FacultieId"), 1L, 1);
 
-                    b.Property<int>("DeansId")
+                    b.Property<int?>("DeansId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -74,7 +74,8 @@ namespace UniversityApi.Migrations
                     b.HasKey("FacultieId");
 
                     b.HasIndex("DeansId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[DeansId] IS NOT NULL");
 
                     b.HasIndex("UniversitysId");
 
@@ -222,9 +223,7 @@ namespace UniversityApi.Migrations
                 {
                     b.HasOne("UniversityApi.Model.Deans", "Deans")
                         .WithOne("Faculties")
-                        .HasForeignKey("UniversityApi.Model.Faculties", "DeansId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UniversityApi.Model.Faculties", "DeansId");
 
                     b.HasOne("UniversityApi.Model.Universitys", "Universitys")
                         .WithMany("Faculties")

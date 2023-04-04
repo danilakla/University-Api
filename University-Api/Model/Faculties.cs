@@ -16,13 +16,13 @@ public class Faculties
 
     public Universitys Universitys { get; set; }
 
-    public int DeansId { get; set; }
+    public int? DeansId { get; set; }
     [JsonIgnore]
 
     public Deans Deans{ get; set; }
 
-    public IQueryable<Groups> Groups { get; set; }
+    public List<Groups> Groups { get; set; }
 
-    public IQueryable<Professions>  Professions{ get; set; }
+    public List<Professions>  Professions{ get; set; }
 
 }

@@ -4,7 +4,7 @@
 
 namespace UniversityApi.Migrations
 {
-    public partial class initTables : Migration
+    public partial class InitTables : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -69,7 +69,7 @@ namespace UniversityApi.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UniversitysId = table.Column<int>(type: "int", nullable: false),
-                    DeansId = table.Column<int>(type: "int", nullable: false)
+                    DeansId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -78,8 +78,7 @@ namespace UniversityApi.Migrations
                         name: "FK_Faculties_Deans_DeansId",
                         column: x => x.DeansId,
                         principalTable: "Deans",
-                        principalColumn: "DeanId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "DeanId");
                     table.ForeignKey(
                         name: "FK_Faculties_Universitys_UniversitysId",
                         column: x => x.UniversitysId,
@@ -160,7 +159,8 @@ namespace UniversityApi.Migrations
                 name: "IX_Faculties_DeansId",
                 table: "Faculties",
                 column: "DeansId",
-                unique: true);
+                unique: true,
+                filter: "[DeansId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Faculties_UniversitysId",
