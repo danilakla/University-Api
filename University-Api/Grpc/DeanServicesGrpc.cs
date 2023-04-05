@@ -45,10 +45,20 @@ public class DeanServicesGrpc:Dean.DeanBase
     
     }
 
-    public override Task<DeanResponse> GetDeanInfo(EmailDean request, ServerCallContext context)
+    public override async Task<DeanResponse> GetDeanInfo(EmailDean request, ServerCallContext context)
     {
+        try
+        {
+            var dean = await _applicationDbContext.Deans.Include(e => e.Faculties).Where(e => e.Email == request.Email).FirstOrDefaultAsync();
 
-        return base.GetDeanInfo(request, context);
+            return new DeanResponse { DeanId = dean.DeanId, FacultieId = dean.Faculties.FacultieId, UniversityId = dean.Faculties.UniversitysId };
+        }
+        catch (Exception)
+        {
+
+            throw;
+        }
+   
     }
 
 
