@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <None Remove="Protos\dean.proto" />
+    <None Remove="Protos\teacher.proto" />
     <None Remove="Protos\university.proto" />
   </ItemGroup>
 
@@ -16,7 +17,8 @@
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 
 	  </Protobuf>
-    <Protobuf Include="Protos\university.proto"  ProtoCompile="True"  GrpcServices="Server">
+	  <Protobuf Include="Protos\teacher.proto" GrpcServices="Client" />
+    <Protobuf Include="Protos\university.proto" ProtoCompile="True" GrpcServices="Server">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Protobuf>
   </ItemGroup>
@@ -27,6 +29,10 @@
     <PackageReference Include="Grpc.AspNetCore" Version="2.40.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.14" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.14" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.14">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.14" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.14">
       <PrivateAssets>all</PrivateAssets>

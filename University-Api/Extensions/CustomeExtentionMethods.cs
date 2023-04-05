@@ -7,6 +7,9 @@ using Microsoft.Extensions.Options;
 using System.Data.Common;
 using UniversityApi.IntegrationEvents;
 using RabbitMQ.Client;
+using UniversityApi.Protos;
+using TeacherMicroservice.Protos;
+using UniversityApi.Grpc.Client;
 
 namespace UniversityApi.Extensions;
 
@@ -77,6 +80,21 @@ public static class CustomeExtentionMethods
 
         services.AddSingleton<IEventBusSubscriptionsManager, InMemoryEventBusSubscriptionsManager>();
     
+        return services;
+    }
+
+    public static IServiceCollection AddGrpcServices(this IServiceCollection services, IConfiguration configuration)
+    {
+        services.AddScoped<ITeacherService, TeacherService>();
+
+        services.AddGrpcClient<Teacher.TeacherClient>((services, options) =>
+        {
+            var universityApi = configuration["AppSettings:Grpc:TeacherApi"];
+            options.Address = new Uri(universityApi);
+        });
+
+
+
         return services;
     }
 
