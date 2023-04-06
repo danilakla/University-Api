@@ -17,7 +17,6 @@ public class Deans
     public string LastName { get; set; }
 
     public string PhoneNumber { get; set; }= "********";
-    [JsonIgnore]
     public Faculties Faculties{ get; set; }
 
 }

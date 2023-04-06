@@ -84,7 +84,32 @@ public class ManagerController : ControllerBase
             throw;
         }
     }
-   public record class FacultieDto
+
+    [Authorize(Roles = "Manager")]
+    [HttpPost("generateTokend/teacher")]
+    public async Task<IActionResult> GenerateTokenTeacher()
+    {
+        try
+        {
+
+
+            var universityId = GetUniversityId(User.Identities.First());
+
+            var payload = new TeacherTokenRegistraion { Role = "Teacher", UniversityId = universityId };
+            var TeacherTokenRegistration = _cryptoService.EncryptSecretString(payload);
+            return Ok(new
+            {
+                TeacherToken = TeacherTokenRegistration,
+
+            });
+        }
+        catch (Exception)
+        {
+
+            throw;
+        }
+    }
+    public record class FacultieDto
     {
         public string FacultieName { get; set; }
     }
@@ -94,6 +119,12 @@ public class ManagerController : ControllerBase
         public int UniversityId { get; set; }
         public int FacultieId { get; set; }
     }
- 
+
+    public record class TeacherTokenRegistraion
+    {
+        public string Role { get; set; }
+        public int UniversityId { get; set; }
+    }
+
 
 }

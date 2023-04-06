@@ -3,6 +3,7 @@ using EventBus.Abstructions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.IdentityModel.Tokens;
 using RabbitMqCustomLib;
 using System.Text;
@@ -22,13 +23,17 @@ builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 
 // Add services to the container.
 builder.Services.AddGrpc();
+builder.Services.AddGrpcServices(builder.Configuration);
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddSingleton<ICryptoService,  CryptoService>();
 builder.Services.AddSingleton<IFacultieService, FacultieService>();
-
+builder.Services.AddGrpcHealthChecks(o =>
+{
+    o.Services.MapService("", r => r.Tags.Contains("public"));
+});
 builder.Services.AddEventBus(builder.Configuration);
 builder.Services.AddIntegrationServices(builder.Configuration);
 builder.Services.AddDataProtection().SetApplicationName("Chat")
@@ -81,6 +86,8 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.MapGrpcService<UniversityService>();
+app.MapGrpcHealthChecksService();
+
 app.MapGrpcService<DeanServicesGrpc>();
 
 

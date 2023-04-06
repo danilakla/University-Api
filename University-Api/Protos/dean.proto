@@ -9,7 +9,6 @@ service Dean{
 
 }
 
-
 message DeanRequest{
 	string name=1;
 	string last_name=2;

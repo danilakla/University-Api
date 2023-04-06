@@ -27,7 +27,7 @@ public class DeanServicesGrpc:Dean.DeanBase
             await _applicationDbContext.Deans.AddAsync(dean);
 
             var facultie = await _applicationDbContext.Faculties.FindAsync(request.DeansId.FacultieId);
-            var university = await _applicationDbContext.Faculties.FindAsync(facultie.UniversitysId);
+            var university = await _applicationDbContext.Universitys.FindAsync(facultie.UniversitysId);
 
             dean.Faculties = facultie;
             await _applicationDbContext.SaveChangesAsync();
