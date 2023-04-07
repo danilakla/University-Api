@@ -86,6 +86,8 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.MapGrpcService<UniversityService>();
+app.MapGrpcService<StudentGrpcServer>();
+
 app.MapGrpcHealthChecksService();
 
 app.MapGrpcService<DeanServicesGrpc>();

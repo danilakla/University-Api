@@ -21,7 +21,7 @@ public class Faculties
 
     public Deans Deans{ get; set; }
 
-    public List<Groups> Groups { get; set; }
+    public List<Groups> Groups { get; set; } = new();
 
     public List<Professions>  Professions{ get; set; }
 

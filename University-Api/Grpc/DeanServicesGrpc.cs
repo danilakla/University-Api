@@ -76,7 +76,8 @@ public class DeanServicesGrpc:Dean.DeanBase
             Name = request.Name,
             Photo = "",
             ProfileId = deanId,
-            University = univName
+            University = univName,
+            Role="Dean",
 
         };
         return managerforProfServiece;

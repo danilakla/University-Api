@@ -14,5 +14,5 @@ public class Professions
 
 
     public Faculties? Faculties { get; set; }
-    public List<Groups>  Groups{ get; set; }
+    public List<Groups> Groups { get; set; } = new();
 }

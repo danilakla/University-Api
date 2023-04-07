@@ -49,7 +49,8 @@ public class UniversityService:University.UniversityBase
                 Name = manager.Name,
                 Photo = "",
                 ProfileId = manager.ManagerId,
-                University = univerSaved.Name
+                University = univerSaved.Name,
+                Role="Manager",
 
             };
             await _universityService.CreateProfile(managerforProfServiece);
@@ -115,6 +116,7 @@ public class UniversityService:University.UniversityBase
                 Photo = "",
                 ProfileId = response.TeacherId,
                 University = university.Name,
+                Role="Teacher"
 
             };
             await _universityService.CreateProfile(teacherforProfServiece);

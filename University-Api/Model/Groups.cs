@@ -19,7 +19,7 @@ public class Groups
 
     public Faculties Faculties { get; set; }
 
-    public List<Students> Students { get; set; }
+    public List<Students> Students { get; set; } = new();
 
 
     public int? ProfessionsId { get; set; }
