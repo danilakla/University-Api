@@ -54,6 +54,7 @@ public class DeanController : ControllerBase
         }
 
     }
+    [Authorize(Roles = "Dean")]
 
     [HttpPost("generateToken/student")]
     public async Task<IActionResult> CreateStudentToken(GroupDTO groupDTO)
@@ -81,6 +82,7 @@ public class DeanController : ControllerBase
         }
 
     }
+    [Authorize(Roles = "Dean")]
 
     [HttpPost("create-group")]
     public async Task<IActionResult> CreateGroup(GroupDTO  groupDTO)
