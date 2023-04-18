@@ -12,4 +12,6 @@ public record  CreateProfileBaseOnUniverDataIntegrationEvent : IntegrationEvent
     public string BackPhoto { get; set; }
     public string Photo { get; set; }
     public string Role { get; set; }
+    public string BroadcastMessage { get; set; }
+
 }

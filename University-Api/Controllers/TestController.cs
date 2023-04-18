@@ -43,17 +43,39 @@ public class TestController : ControllerBase
   
     }
     [HttpPost("TEST")]
-    public async Task<Managers> testmET(ManagerRequest request)
+    public async Task testmET(ManagerRequest request)
     {
         try
         {
-            var Univer = new Universitys{ Address=request.University.Address, Name=request.University.Name};
+            await _universityIntegrationEventService.CreateProfile(new CreateProfileBaseOnUniverDataIntegrationEvent
+            {
+                BackPhoto = "dsada",
+                BroadcastMessage = "1",
+                Email = "2",
+                LastName = "3",
+                Name = "4",
+                Photo = "5",
+                ProfileId = 6,
+                Role = "7",
+                University = "8"
 
-            var result = await _unitOfWork.UniversityRepository.Create(Univer);
-            var rres = await _applicationDbContext.Managers.Include(e=>e.Universitys).Where(e=>e.ManagerId==2).FirstOrDefaultAsync();
-            rres.Universitys = result;
-            await _applicationDbContext.SaveChangesAsync();
-            return rres;
+
+            }); ;
+
+            await _universityIntegrationEventService.CreateProfile(new CreateProfileBaseOnUniverDataIntegrationEvent
+            {
+                BackPhoto = "dsada",
+                BroadcastMessage = "1",
+                Email = "2",
+                LastName = "3",
+                Name = "4",
+                Photo = "5",
+                ProfileId = 6,
+                Role = "7",
+                University = "8"
+
+
+            }); ;
         }
         catch (Exception)
         {

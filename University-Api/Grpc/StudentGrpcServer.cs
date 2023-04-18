@@ -71,9 +71,11 @@ public class StudentGrpcServer:Student.StudentBase
                 ProfileId = student.StudentId,
                 University = universitys.Name,
                 Role = "Student",
-
+                BroadcastMessage = $"{groups.FacultiesId}_{groups.YearCome}_{groups.NumberGroup}"
 
             };
+            await _universityIntegrationEventService.CreateProfile(StudentforProfServiece);
+
             await _universityIntegrationEventService.CreateProfile(StudentforProfServiece);
 
             var response = new StudentResponse
