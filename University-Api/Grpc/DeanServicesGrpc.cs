@@ -32,7 +32,9 @@ public class DeanServicesGrpc:Dean.DeanBase
             dean.Faculties = facultie;
             await _applicationDbContext.SaveChangesAsync();
             var profileReq = CreateProfileRequset(request, dean.DeanId, university.Name);
-            _universityIntegrationEventService.CreateProfile(profileReq);
+           await _universityIntegrationEventService.CreateProfile(profileReq);
+            await _universityIntegrationEventService.CreateProfile(profileReq);
+
             return new DeanResponse { DeanId = dean.DeanId, FacultieId = facultie.FacultieId, UniversityId = facultie.UniversitysId };
         }
         catch (Exception)
@@ -77,9 +79,11 @@ public class DeanServicesGrpc:Dean.DeanBase
             Photo = "",
             ProfileId = deanId,
             University = univName,
-            Role="Dean",
+            Role = "Dean",
+            BroadcastMessage = "Empty",
 
         };
+
         return managerforProfServiece;
     }
 }

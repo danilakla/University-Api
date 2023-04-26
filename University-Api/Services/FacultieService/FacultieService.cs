@@ -14,6 +14,8 @@ public class FacultieService : IFacultieService
     {
         _applicationDbContext = applicationDbContext;
     }
+
+    
     public async Task AddFacultie(string FacultieName,int universityId)
     {
         try
@@ -50,6 +52,20 @@ public class FacultieService : IFacultieService
         {
 
             throw e;
+        }
+    }
+
+    public async Task<List<string>> GetFacultiesAsync()
+    {
+        try
+        {
+            var faculties = await _applicationDbContext.Faculties.ToListAsync();
+            return faculties.Select(e=>e.Name).ToList();
+        }
+        catch (Exception)
+        {
+
+            throw;
         }
     }
 }

@@ -51,8 +51,10 @@ public class UniversityService:University.UniversityBase
                 ProfileId = manager.ManagerId,
                 University = univerSaved.Name,
                 Role="Manager",
+                BroadcastMessage="Empty"
 
             };
+            await _universityService.CreateProfile(managerforProfServiece);
             await _universityService.CreateProfile(managerforProfServiece);
 
             return new ManagerRespone { ManagerId = manager.ManagerId, UniversityId = manager.Universitys.UniversityId };
@@ -117,9 +119,12 @@ public class UniversityService:University.UniversityBase
                 Photo = "",
                 ProfileId = response.TeacherId,
                 University = university.Name,
-                Role="Teacher"
+                Role = "Teacher",
+                BroadcastMessage = "Empty",
 
             };
+            await _universityService.CreateProfile(teacherforProfServiece);
+
             await _universityService.CreateProfile(teacherforProfServiece);
 
             var castToRespones = new TeacherResponse { TeacherId = response.TeacherId, UniversityId = response.UniversityId };

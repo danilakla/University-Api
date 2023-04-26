@@ -38,7 +38,7 @@ public class ManagerController : ControllerBase
     
     [Authorize(Roles = "Manager")]
 
-    [HttpPost("create-facultie")]
+    [HttpPost("/create-facultie")]
     public async Task<IActionResult> CreateFacultie(FacultieDto facultieDto)
     {
         try
@@ -61,7 +61,7 @@ public class ManagerController : ControllerBase
     }
 
     [Authorize(Roles = "Manager")]
-    [HttpPost("generateTokend/dean")]
+    [HttpPost("/generateToken/dean")]
     public async Task<IActionResult> GenerateTokenDean(FacultieDto facultieDto)
     {
         try
@@ -73,8 +73,8 @@ public class ManagerController : ControllerBase
             var facultie = await _facultieService.FindByName(facultieDto.FacultieName);
             var payload = new DeanTokenRegistraion { FacultieId = facultie.FacultieId, Role = "Dean", UniversityId = universityId };
             var deanTokenRegistration =  _cryptoService.EncryptSecretString(payload);
-            return Ok(new { 
-            DeanToken=deanTokenRegistration,
+            return Ok(new {
+                Token = deanTokenRegistration,
             
             });
         }
@@ -86,7 +86,7 @@ public class ManagerController : ControllerBase
     }
 
     [Authorize(Roles = "Manager")]
-    [HttpPost("generateTokend/teacher")]
+    [HttpPost("/generateToken/teacher")]
     public async Task<IActionResult> GenerateTokenTeacher()
     {
         try
@@ -99,7 +99,7 @@ public class ManagerController : ControllerBase
             var TeacherTokenRegistration = _cryptoService.EncryptSecretString(payload);
             return Ok(new
             {
-                TeacherToken = TeacherTokenRegistration,
+                Token = TeacherTokenRegistration,
 
             });
         }
@@ -109,7 +109,7 @@ public class ManagerController : ControllerBase
             throw;
         }
     }
-    public record class FacultieDto
+    public  class FacultieDto
     {
         public string FacultieName { get; set; }
     }

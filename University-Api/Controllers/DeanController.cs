@@ -24,7 +24,7 @@ public class DeanController : ControllerBase
     }
     [Authorize(Roles = "Dean")]
 
-    [HttpPost("create-professions")]
+    [HttpPost("/create-professions")]
     public async Task<IActionResult> CreateProfesstions(ProfessionDTO  professionDTO)
     {
         try
@@ -56,7 +56,7 @@ public class DeanController : ControllerBase
     }
     [Authorize(Roles = "Dean")]
 
-    [HttpPost("generateToken/student")]
+    [HttpPost("/generateToken/student")]
     public async Task<IActionResult> CreateStudentToken(GroupDTO groupDTO)
     {
         try
@@ -71,7 +71,7 @@ public class DeanController : ControllerBase
 
             return Ok(new
             {
-                StudentAuthorizationToken = studentTokenRegistration
+                Token = studentTokenRegistration
             });
 
         }
@@ -84,7 +84,7 @@ public class DeanController : ControllerBase
     }
     [Authorize(Roles = "Dean")]
 
-    [HttpPost("create-group")]
+    [HttpPost("/create-group")]
     public async Task<IActionResult> CreateGroup(GroupDTO  groupDTO)
     {
         try
