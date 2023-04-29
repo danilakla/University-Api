@@ -30,16 +30,18 @@ public class DeanController : ControllerBase
         try
         {
 
-            var facId = GetFacultieId(User.Identities.First());
-            var facuiltie = await _applicationDbContext.Faculties.FindAsync(facId);
-            Professions professions = new() {Name=professionDTO.Name };
-            if(facuiltie.Professions is null) {
-                facuiltie.Professions = new List<Professions> { professions };
-            }
-            else
+            var hasProfes=await _applicationDbContext.Professions.Where(e=>e.Name==professionDTO.Name).FirstOrDefaultAsync();
+            if(hasProfes is not null)
             {
-                facuiltie.Professions.Add(professions);
+                throw new Exception();
             }
+            var facId = GetFacultieId(User.Identities.First());
+
+            var facuiltie = await _applicationDbContext.Faculties.Include(e=>e.Professions).Where(e=>e.FacultieId==facId).FirstOrDefaultAsync();
+            Professions professions = new() {Name=professionDTO.Name };
+        
+                facuiltie.Professions.Add(professions);
+            
             await _applicationDbContext.SaveChangesAsync();
             return Ok(new
             {

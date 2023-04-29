@@ -15,11 +15,13 @@ public class ManagerController : ControllerBase
 {
     private readonly IFacultieService _facultieService;
     private readonly ICryptoService _cryptoService;
+    private readonly ApplicationDbContext _applicationDbContext;
 
-    public ManagerController(IFacultieService facultieService, ICryptoService cryptoService)
+    public ManagerController(IFacultieService facultieService, ICryptoService cryptoService, ApplicationDbContext applicationDbContext)
     {
         _facultieService = facultieService;
         _cryptoService = cryptoService;
+        _applicationDbContext = applicationDbContext;
     }
 
     private int GetUniversityId(ClaimsIdentity claimsIdentity)
@@ -43,7 +45,11 @@ public class ManagerController : ControllerBase
     {
         try
         {
- 
+                var hasFacultie=await _applicationDbContext.Faculties.Where(e=>e.Name==facultieDto.FacultieName).FirstOrDefaultAsync();
+            if(hasFacultie is not null)
+            {
+                throw new Exception();
+            }
             var universityId = GetUniversityId(User.Identities.First());
 
             await _facultieService.AddFacultie(facultieDto.FacultieName, universityId);
